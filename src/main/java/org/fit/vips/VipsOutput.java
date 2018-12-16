@@ -108,6 +108,7 @@ public final class VipsOutput {
 				{
 					String src = "";
 					String content = "";
+					String originalNodeIds = "";
 					for (VipsBlock block : visualStructure.getNestedBlocks())
 					{
 						ElementBox elementBox = block.getElementBox();
@@ -123,9 +124,11 @@ public final class VipsOutput {
 
 						content += elementBox.getText() + " ";
 
+						originalNodeIds += Utils.getEvincedId(elementBox);
 					}
 					layoutNode.setAttribute("SRC", src);
 					layoutNode.setAttribute("Content", content);
+					layoutNode.setAttribute("EvincedId", originalNodeIds);
 				}
 			}
 
@@ -141,6 +144,7 @@ public final class VipsOutput {
 			{
 				String src = "";
 				String content = "";
+				String originalNodeIds = "";
 				for (VipsBlock block : visualStructure.getNestedBlocks())
 				{
 					ElementBox elementBox = block.getElementBox();
@@ -156,9 +160,11 @@ public final class VipsOutput {
 
 					content += elementBox.getText() + " ";
 
+					originalNodeIds += Utils.getEvincedId(elementBox);
 				}
 				layoutNode.setAttribute("SRC", src);
 				layoutNode.setAttribute("Content", content);
+				layoutNode.setAttribute("EvincedId", originalNodeIds);
 			}
 
 			parentNode.appendChild(layoutNode);

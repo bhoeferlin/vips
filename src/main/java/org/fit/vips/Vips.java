@@ -304,7 +304,8 @@ public class Vips {
 
 		System.out.println("Execution time of VIPS: " + diff + " ns; " +
 				(diff / 1000000.0) + " ms; " +
-				(diff / 1000000000.0) + " sec");
+				
+				(diff / 1000000000.0) + " sec");		
 	}
 
 	/**
@@ -361,6 +362,8 @@ public class Vips {
 			getViewport();
 			restoreOut();
 
+			Utils.setEvincedIds(_domAnalyzer.getBody());
+
 			String outputFolder = "";
 			String oldWorkingDirectory = "";
 			String newWorkingDirectory = "";
@@ -385,6 +388,16 @@ public class Vips {
 
 			if (_outputToFolder)
 				System.setProperty("user.dir", oldWorkingDirectory);
+
+			System.out.println("Writing results as HTML");
+			Document xmlDoc = Utils.loadXmlDocumentFromFile(_filename + ".xml");
+			Document htmlDoc = Utils.xmlToHtml(xmlDoc);
+			Utils.writeHtmlToFile(htmlDoc, _filename + ".html");
+			System.out.println("DONE writing results as HTML");
+
+			System.out.println("Writing EvincedIDs to file: " + _filename + "-evinced-ids.txt");
+			Utils.writeAllEvincedIdsToFile(htmlDoc, _filename + "-evinced-ids.txt");
+			System.out.println("DONE writing EvincedIDs to file");
 		}
 		catch (Exception e)
 		{
