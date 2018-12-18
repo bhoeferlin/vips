@@ -397,8 +397,8 @@ public class Vips {
 			Utils.writeHtmlToFile(htmlDoc.getDocumentElement(), _dirName + "/" + _filename + ".html");
 			System.out.println("DONE writing results as HTML");
 
-			System.out.println("Writing EvincedIDs to file: " + _filename + "-evinced-ids.txt");
-			Utils.writeAllEvincedIdsToFile(htmlDoc, _dirName + "/" + _filename + "-evinced-ids.txt");
+			System.out.println("Generating evinced script: " + _dirName + "/evinced-mark-VIPS-blocks.js");
+			Utils.generateEvincedScript(htmlDoc, _dirName + "/evinced-mark-VIPS-blocks.js");
 			System.out.println("DONE writing EvincedIDs to file");
 		}
 		catch (Exception e)

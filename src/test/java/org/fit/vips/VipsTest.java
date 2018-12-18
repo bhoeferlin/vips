@@ -27,6 +27,6 @@ public class VipsTest {
 		vips.setPredefinedDoC(8);
 		vips.setOutputFileName("VIPSResult");
 		vips.setOutputDirectoryName(dirName);
-		vips.startSegmentation("http://www.railpass.com/");	
+		vips.startSegmentation("https://developer.mozilla.org/en-US/");	
 	}
 }

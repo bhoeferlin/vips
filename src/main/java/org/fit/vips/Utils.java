@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -159,8 +161,7 @@ public class Utils {
 
 	private static void extractAllEvincedIds(Node node, Set<String> ids) {
 		if (node instanceof Element) {
-			Element element = (Element) node;
-			System.out.println("Checking element " + element.getAttribute("EvincedId"));
+			Element element = (Element) node;			
 			if (element.hasAttribute("EvincedId")) {
 				String[] evincedIds = element.getAttribute("EvincedId").split(";");
 				for (String id : evincedIds) {
@@ -187,6 +188,31 @@ public class Utils {
 			System.err.println("Error: " + e.getMessage());
 			e.printStackTrace();
 			throw new RuntimeException(e);
+		}
+	}
+
+	public static void generateEvincedScript(Document htmlDoc, String fileName) {
+		PrintStream out = null;
+		try {
+			System.out.println("WRITING DATA");
+			Set<String> evincedIds = new HashSet<>();
+			extractAllEvincedIds(htmlDoc.getDocumentElement(), evincedIds);
+			String evincedIdsStr = String.join(";", evincedIds);
+			String evincedScript = Files.readString(Paths.get("src/main/resources/evinced-mark-VIPS-blocks.js"));
+			evincedScript = evincedScript.replace("<put-blocks-ids-here>", evincedIdsStr);
+			System.out.println("STR = " + evincedScript);
+			out = new PrintStream(new FileOutputStream(fileName));
+			out.print(evincedScript);			
+		}
+		catch (Exception e)
+		{
+			System.err.println("Error: " + e.getMessage());
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if (out != null) {
+				out.close();
+			}
 		}
 	}
 }
