@@ -193,7 +193,7 @@ public class Utils {
 	public static void writeAllEvincedIdsToFile(Document htmlDoc, String fileName) {
 		Set<String> evincedIds = new HashSet<>();
 		extractAllEvincedIds(htmlDoc.getDocumentElement(), evincedIds);
-		try (PrintStream out = new PrintStream(new FileOutputStream("filename.txt"))) {
+		try (PrintStream out = new PrintStream(new FileOutputStream("evinced-ids-of-blocks.txt"))) {
 			out.print(String.join(";", evincedIds));
 		}
 		catch (Exception e)
