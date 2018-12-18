@@ -46,6 +46,7 @@ public class Vips {
 	private boolean _outputEscaping = true;
 	private int _pDoC = 11;
 	private String _filename = "";
+	private String _dirName = "";
 	private	int sizeTresholdWidth = 350;
 	private	int sizeTresholdHeight = 400;
 
@@ -295,7 +296,7 @@ public class Vips {
 
 		VipsOutput vipsOutput = new VipsOutput(_pDoC);
 		vipsOutput.setEscapeOutput(_outputEscaping);
-		vipsOutput.setOutputFileName(_filename);
+		vipsOutput.setOutputFileName(_dirName + "/" + _filename);
 		vipsOutput.writeXML(constructor.getVisualStructure(), _viewport);
 
 		endTime = System.nanoTime();
@@ -363,6 +364,7 @@ public class Vips {
 			restoreOut();
 
 			Utils.setEvincedIds(_domAnalyzer.getBody());
+			Utils.writeHtmlToFile(_domAnalyzer.getRoot(), _dirName + "/" + "html-with-evinced-ids.html");
 
 			String outputFolder = "";
 			String oldWorkingDirectory = "";
@@ -390,13 +392,13 @@ public class Vips {
 				System.setProperty("user.dir", oldWorkingDirectory);
 
 			System.out.println("Writing results as HTML");
-			Document xmlDoc = Utils.loadXmlDocumentFromFile(_filename + ".xml");
+			Document xmlDoc = Utils.loadXmlDocumentFromFile(_dirName + "/" + _filename + ".xml");
 			Document htmlDoc = Utils.xmlToHtml(xmlDoc);
-			Utils.writeHtmlToFile(htmlDoc, _filename + ".html");
+			Utils.writeHtmlToFile(htmlDoc.getDocumentElement(), _dirName + "/" + _filename + ".html");
 			System.out.println("DONE writing results as HTML");
 
 			System.out.println("Writing EvincedIDs to file: " + _filename + "-evinced-ids.txt");
-			Utils.writeAllEvincedIdsToFile(htmlDoc, _filename + "-evinced-ids.txt");
+			Utils.writeAllEvincedIdsToFile(htmlDoc, _dirName + "/" + _filename + "-evinced-ids.txt");
 			System.out.println("DONE writing EvincedIDs to file");
 		}
 		catch (Exception e)
@@ -415,6 +417,17 @@ public class Vips {
 		else
 		{
 			System.out.println("Invalid filename!");
+		}
+	}
+
+	public void setOutputDirectoryName(String dirName) {
+		if (!dirName.equals(""))
+		{
+			_dirName = dirName;
+		}
+		else
+		{
+			System.out.println("Invalid directory name!");
 		}
 	}
 }

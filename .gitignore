@@ -3,3 +3,4 @@ target/
 launch.test.json
 .settings
 .classpath
+evinced-output*/

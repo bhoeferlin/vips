@@ -5,14 +5,11 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.PrintStream;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Result;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -37,17 +34,6 @@ public class Utils {
             setEvincedIds(node.getChildNodes().item(i), evincedId);
         }
     }
-
-    public static void printDom(Document doc) {        
-        try {            
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            Result output = new StreamResult(new File("dom-with-ids.html"));
-            DOMSource input = new DOMSource(doc);        
-            transformer.transform(input, output);
-        } catch (TransformerException e) {            
-            e.printStackTrace();
-        }                                
-	}
 
 	private static Element initHtmlDoc(Document htmlDoc) {
 		Element htmlRoot =  htmlDoc.createElement("html");        
@@ -146,7 +132,7 @@ public class Utils {
 		}		
 	}
 	
-	public static void writeHtmlToFile(Document htmlDoc, String fileName) {
+	public static void writeHtmlToFile(Element htmlDoc, String fileName) {
 		try 
 		{
 			DOMSource source = new DOMSource(htmlDoc);
@@ -193,7 +179,7 @@ public class Utils {
 	public static void writeAllEvincedIdsToFile(Document htmlDoc, String fileName) {
 		Set<String> evincedIds = new HashSet<>();
 		extractAllEvincedIds(htmlDoc.getDocumentElement(), evincedIds);
-		try (PrintStream out = new PrintStream(new FileOutputStream("evinced-ids-of-blocks.txt"))) {
+		try (PrintStream out = new PrintStream(new FileOutputStream(fileName))) {
 			out.print(String.join(";", evincedIds));
 		}
 		catch (Exception e)
