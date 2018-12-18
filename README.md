@@ -10,4 +10,4 @@ All output files will be written to an `evinced-output-<date>` folder:
 1. VIPSResult.xml - original algorithm output in XML.
 2. VIPSResult.html - our HTML output of the algorithm that can be viewed in a browser.
 3. html-with-evinced-ids.txt - the original website HTML enriched with our IDS.
-4. VIPSResult-evinced-ids.txt - list of all the DOM IDs that relate to visual extracted blocks.
+4. evinced-mark-VIPS-blocks - a generated script that once injected to the source website it wil mark the visual blocks found by VIPS in red.
