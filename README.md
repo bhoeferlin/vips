@@ -1,5 +1,5 @@
-vips_java
-=============
+vips
+=====
 
 Forked from https://github.com/tpopela/vips_java - this is a JAVA implementation of the VIPS (Visual Internet Page Segmentation) algorithm by Microsoft (http://www.cad.zju.edu.cn/home/dengcai/VIPS/VIPS_July-2004.pdf).
 
