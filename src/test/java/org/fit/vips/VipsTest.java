@@ -1,7 +1,6 @@
 package org.fit.vips;
 
 import java.io.File;
-import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,8 +10,7 @@ public class VipsTest {
     public void runSimplePageSegmentation() {
 		Vips vips = new Vips();
 
-		Date date = new Date();
-		String dirName = "evinced-output-" + date;
+		String dirName = "evinced-output";
 		File theDir = new File(dirName);
 		try{
 			theDir.mkdir();	
