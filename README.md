@@ -24,7 +24,7 @@ If you have used the `mvn compile` then run:
 
 or if `mvn package`:
 
-``java -cp target/vips-java-*.jar org.fit.vips.VipsTester``
+``java -cp target/vips-java-1.0-shaded.jar org.fit.vips.VipsTester``
 
 to start the VipsTester.
 
