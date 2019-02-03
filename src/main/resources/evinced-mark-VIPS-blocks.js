@@ -1,25 +1,22 @@
-let id = 0;
 const nodesMap = {};
-const markAllNodes = (node) => {		
-	id++;
+const createMap = node => {
+  if (node.nodeType === 1) {
+    id = node.getAttribute("evinced_id");
+    nodesMap[id] = node;
+  }
 
-	if (node.nodeType === 1) {
-		node.setAttribute("evinced_id", id);
-		nodesMap[id] = node;
-	}
-	
-	node.childNodes.forEach(child => {
-		markAllNodes(child);
-	});	
-}
+  node.childNodes.forEach(child => {
+    createMap(child);
+  });
+};
 
-markAllNodes(document.body);
+createMap(document.body);
 
-const evincedIdsStr = '<put-blocks-ids-here>';
-const evincedIds = evincedIdsStr.split(';');
+const evincedIdsStr = "<put-blocks-ids-here>";
+const evincedIds = evincedIdsStr.split(";");
 evincedIds.forEach(id => {
-	let node = nodesMap[id];
-	if (node) {
-		node.style = node.style + ';border: 5px red solid';
-	}
+  let node = nodesMap[id];
+  if (node) {
+    node.style = node.style + ";border: 5px red solid";
+  }
 });
