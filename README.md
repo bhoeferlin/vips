@@ -1,13 +1,16 @@
 vips
 ====
 
-Original Work: https://github.com/tpopela/vips_java - Java implementation of VIPS algorithm -- XML output
-Fork: https://github.com/GetEvinced/vips - HTML output with id tagged to DOM nodes
+Original Work: https://github.com/tpopela/vips_java Java implementation of VIPS algorithm -- XML output
+
+Fork: https://github.com/GetEvinced/vips HTML output with id tagged to DOM nodes
 
 *Description of VIPS and the implementation*
+
 http://www.fit.vutbr.cz/study/DP/DP.php?id=14163&file=t
 
 *Original work by Microsoft*
+
 http://www.cad.zju.edu.cn/home/dengcai/VIPS/VIPS_July-2004.pdf
 
 Compilation
