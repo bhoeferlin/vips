@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.PrintStream;
+import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashSet;
@@ -16,6 +17,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.apache.commons.io.IOUtils;
 import org.fit.cssbox.layout.ElementBox;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -243,7 +245,10 @@ public class Utils
             Set< String > evincedIds = new HashSet<>();
             extractAllEvincedIds( htmlDoc.getDocumentElement(), evincedIds );
             String evincedIdsStr = String.join( ";", evincedIds );
-            String evincedScript = new String( Files.readAllBytes( Paths.get( /*"src/main/resources/"+*/"evinced-mark-VIPS-blocks.js" ) ) );
+            //String evincedScript = new String( Files.readAllBytes( Paths.get( "src/main/resources/evinced-mark-VIPS-blocks.js" ) ) );            
+            StringWriter writer = new StringWriter();
+            IOUtils.copy(Utils.class.getClassLoader().getResourceAsStream( "evinced-mark-VIPS-blocks.js" ), writer, "utf-8");
+            String evincedScript = writer.toString();
             evincedScript = evincedScript.replace( "<put-blocks-ids-here>", evincedIdsStr );
             System.out.println( "STR = " + evincedScript );
             out = new PrintStream( new FileOutputStream( fileName ) );
